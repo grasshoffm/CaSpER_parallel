@@ -4,7 +4,7 @@
 \alias{ControlNormalize}
 \title{ControlNormalize()}
 \usage{
-ControlNormalize(object, vis.bound, noise.thr)
+ControlNormalize(object)
 }
 \arguments{
 \item{object}{casper object}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/preprocessing.R
 \name{PerformMedianFilter}
 \alias{PerformMedianFilter}
-\title{PerformMedianFilter()}
+\title{PerformMeanFilter()}
 \usage{
 PerformMedianFilter(object, window.length = 50, length.iterations = 50)
 }

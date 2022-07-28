@@ -19,7 +19,7 @@ associated with the dataset, including data, smoothed data, baf values, annotati
 
 \item{\code{loh}}{original baf signal}
 
-\item{\code{median.filtered.data}}{median filtered expression signal}
+\item{\code{filtered.data}}{median filtered expression signal}
 
 \item{\code{loh.median.filtered.data}}{median filtered baf signal}
 
@@ -29,9 +29,7 @@ associated with the dataset, including data, smoothed data, baf values, annotati
 
 \item{\code{control.normalized}}{control normalization is performed by subtracting reference expression values from the tumor expression values.}
 
-\item{\code{control.normalized.visbound}}{control normalized data is thresholded in order to perform better visualization.}
-
-\item{\code{control.normalized.visbound.noiseRemoved}}{noise is removed from control normalized and thresholded data.}
+\item{\code{control.normalized.noiseRemoved}}{noise is removed from control normalized and thresholded data.}
 
 \item{\code{large.scale.cnv.events}}{large scale CNV events identified by CaSpER}
 

@@ -34,12 +34,14 @@ generateParam <- function(object, cnv.scale = 3) {
 #'
 #' @param method iterative or fixed method. Fixed performs CNV calls on desired baf and expression scale whereas iterative performs pairwise comparison of all expression and baf scale pairs. Iterative method is recommendend. (default: iterative)
 #'
+#' @param n_cores The number of cores you want to use.
+#'
 #' @return list of objects
 #'
 #' @export
 #'
 #'
-runCaSpER <- function(object, removeCentromere = T, cytoband = object@cytoband, method = "iterative") {
+runCaSpER <- function(object, removeCentromere = T, cytoband = object@cytoband, method = "iterative", n_cores = 1) {
     final.objects <- list()
     
     if (method == "iterative") {
@@ -47,30 +49,42 @@ runCaSpER <- function(object, removeCentromere = T, cytoband = object@cytoband, 
         cnv.list <- list()
         
         message("Performing recursive median filtering...")
-        
-        for (i in 1:object@loh.scale) {
-            loh.list[[i]] <- lohCallMedianFilterByChr(object, loh.scale = i)
-        }
+	loh.scales <- 1:object@loh.scale
+        loh.list <- mclapply(loh.scales, lohCallMedianFilterByChr, object = object, n = 50, scale.iteration = 50, mc.cores = n_cores)
+        #for (i in 1:object@loh.scale) {
+            #loh.list[[i]] <- lohCallMedianFilterByChr(object, loh.scale = i)
+        #}
            
         message("Performing HMM segmentation...")
-        
-        for (i in 1:object@cnv.scale) {
-            cnv.list[[i]] <- PerformSegmentationWithHMM(object, cnv.scale = i, removeCentromere = T, cytoband = cytoband)
-        }
+	cnv.scales = 1:object@cnv.scale
+        cnv.list <- mclapply(cnv.scales, PerformSegmentationWithHMM, object = object, removeCentromere = T, cytoband = cytoband, mc.cores = n_cores)
+        #for (i in 1:object@cnv.scale) {
+        #    cnv.list[[i]] <- PerformSegmentationWithHMM(object, cnv.scale = i, removeCentromere = T, cytoband = cytoband)
+        #}
         
         combin <- expand.grid(1:object@cnv.scale, 1:object@loh.scale)
         list.names <- apply(combin, 1, function(x) paste(x[1], x[2], sep = "_vs_"))
-        
-        for (i in 1:nrow(combin)) {
-            loh.scale <- combin[i, 2]
-            cnv.scale <- combin[i, 1]
-            message("Processing cnv.scale:", cnv.scale, " loh.scale:", loh.scale, "...")
-            object <- cnv.list[[cnv.scale]]
-            object@loh.median.filtered.data <- loh.list[[loh.scale]]@loh.median.filtered.data
-            object <- calculateLOHShiftsForEachSegment(object)
-            object <- assignStates(object)
-            final.objects[[i]] <- generateLargeScaleEvents(object)
-        }
+        final.objects <- mclapply(1:nrow(combin), function(x){
+	  loh.scale <- combin[x,2]
+	  cnv.scale <- combin[x,1]
+	  message("Processing cnv.scale:", cnv.scale, " loh.scale:", loh.scale, "...")
+	  object <- cnv.list[[cnv.scale]]
+          object@loh.median.filtered.data <- loh.list[[loh.scale]]@loh.median.filtered.data
+          object <- calculateLOHShiftsForEachSegment(object)
+          object <- assignStates(object)
+	  result <- generateLargeScaleEvents(object)
+	  return(result)
+	}, mc.cores = n_cores)
+        #for (i in 1:nrow(combin)) {
+        #    loh.scale <- combin[i, 2]
+        #    cnv.scale <- combin[i, 1]
+        #    message("Processing cnv.scale:", cnv.scale, " loh.scale:", loh.scale, "...")
+        #    object <- cnv.list[[cnv.scale]]
+        #    object@loh.median.filtered.data <- loh.list[[loh.scale]]@loh.median.filtered.data
+        #    object <- calculateLOHShiftsForEachSegment(object)
+        #    object <- assignStates(object)
+        #    final.objects[[i]] <- generateLargeScaleEvents(object)
+        #}
         names(final.objects) <- list.names
     } else if (method == "fixed") {
         object <- PerformSegmentationWithHMM(object, cnv.scale = object@cnv.scale, removeCentromere = T, cytoband = cytoband)

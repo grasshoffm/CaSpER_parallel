@@ -4,7 +4,7 @@
 \alias{readBAFExtractOutput}
 \title{readBAFExtractOutput()}
 \usage{
-readBAFExtractOutput(path, sequencing.type = "bulk")
+readBAFExtractOutput(path, sequencing.type = "bulk", suffix = "snp")
 }
 \arguments{
 \item{path}{path for the folder that contains BAFExtract output files}

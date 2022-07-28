@@ -4,15 +4,10 @@
 \alias{PerformMedianFilterByChr}
 \title{PerformMedianFilterByChr()}
 \usage{
-PerformMedianFilterByChr(object, window.length = 50,
-  length.iterations = 50)
+PerformMedianFilterByChr(object)
 }
 \arguments{
 \item{object}{casper object}
-
-\item{window.length}{window length used for median filtering}
-
-\item{length.iterations}{increase in window length at each scale iteration}
 }
 \value{
 object

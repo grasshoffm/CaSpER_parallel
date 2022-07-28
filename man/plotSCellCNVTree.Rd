@@ -4,9 +4,12 @@
 \alias{plotSCellCNVTree}
 \title{plotSCellCNVTree()}
 \usage{
-plotSCellCNVTree(finalChrMat, sampleName,
+plotSCellCNVTree(
+  finalChrMat,
+  sampleName,
   path = "C:\\\\Users\\\\aharmanci\\\\Downloads\\\\phylip-3.695\\\\phylip-3.695\\\\exe",
-  fileName)
+  fileName
+)
 }
 \arguments{
 \item{finalChrMat}{large scale events identified from CaSpER represented as matrix. Rows indicates samples (cells) whereas columns indicates chromosome arms}

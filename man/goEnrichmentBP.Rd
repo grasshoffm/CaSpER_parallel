@@ -4,8 +4,15 @@
 \alias{goEnrichmentBP}
 \title{goEnrichmentBP()}
 \usage{
-goEnrichmentBP(genes, ontology, universe = character(0), pvalue = 0.05,
-  annotation = "org.Hs.eg.db", conditionalSearch = TRUE, genes2)
+goEnrichmentBP(
+  genes,
+  ontology,
+  universe = character(0),
+  pvalue = 0.05,
+  annotation = "org.Hs.eg.db",
+  conditionalSearch = TRUE,
+  genes2
+)
 }
 \arguments{
 \item{genes}{list of genes}

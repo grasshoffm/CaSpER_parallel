@@ -4,8 +4,14 @@
 \alias{plotGEAndBAFOneSample}
 \title{plotGEAndBAFOneSample()}
 \usage{
-plotGEAndBAFOneSample(object, cnv.scale, loh.scale, sample, n = 50,
-  scale.iteration = 50)
+plotGEAndBAFOneSample(
+  object,
+  cnv.scale,
+  loh.scale,
+  sample,
+  n = 50,
+  scale.iteration = 50
+)
 }
 \arguments{
 \item{object}{casper object}

@@ -4,12 +4,27 @@
 \alias{CreateCasperObject}
 \title{CreateCasperObject}
 \usage{
-CreateCasperObject(raw.data, annotation, control.sample.ids, cytoband,
-  loh.name.mapping, cnv.scale, loh.scale, method, loh,
-  project = "casperProject", sequencing.type, expr.cutoff = 4.5,
-  display.progress = TRUE, log.transformed = TRUE,
-  centered.threshold = 3, window.length = 50, length.iterations = 50,
-  vis.bound = 2, noise.thr = 0.3, genomeVersion = "hg19", ...)
+CreateCasperObject(
+  raw.data,
+  annotation,
+  control.sample.ids,
+  cytoband,
+  loh.name.mapping,
+  cnv.scale,
+  loh.scale,
+  method,
+  loh,
+  project = "casperProject",
+  matrix.type = "raw",
+  sequencing.type,
+  expr.cutoff = 0.1,
+  log.transformed = TRUE,
+  window.length = 50,
+  length.iterations = 50,
+  genomeVersion = "hg19",
+  filter = "median",
+  ...
+)
 }
 \arguments{
 \item{raw.data}{the matrix of genes (rows) vs. cells (columns) containing the raw counts}
@@ -36,15 +51,13 @@ CreateCasperObject(raw.data, annotation, control.sample.ids, cytoband,
 
 \item{log.transformed}{indicates if the data log2 transformed or not. (default:TRUE)}
 
-\item{centered.threshold}{}
-
 \item{window.length}{window length used for median filtering (default: 50)}
 
 \item{length.iterations}{increase in window length at each scale iteration (default: 50)}
 
-\item{vis.bound}{threshold for control normalized data for better visualization (default: 2)}
-
 \item{genomeVersion}{genomeVersion: hg19 or hg38 (default: hg19)}
+
+\item{vis.bound}{threshold for control normalized data for better visualization (default: 2)}
 }
 \value{
 casper

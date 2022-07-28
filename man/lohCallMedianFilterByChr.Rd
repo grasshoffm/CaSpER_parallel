@@ -4,8 +4,7 @@
 \alias{lohCallMedianFilterByChr}
 \title{readBAFExtractOutput()}
 \usage{
-lohCallMedianFilterByChr(object, loh.scale, n = 50,
-  scale.iteration = 50)
+lohCallMedianFilterByChr(object, loh.scale, n = 50, scale.iteration = 50)
 }
 \arguments{
 \item{path}{path for the folder that contains BAFExtract output files}

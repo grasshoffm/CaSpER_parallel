@@ -4,8 +4,13 @@
 \alias{generateAnnotation}
 \title{generateAnnotation()}
 \usage{
-generateAnnotation(id_type = "ensembl_gene_id", genes, ishg19,
-  centromere)
+generateAnnotation(
+  id_type = "ensembl_gene_id",
+  genes,
+  ishg19,
+  centromere,
+  host = "www.ensembl.org"
+)
 }
 \arguments{
 \item{id_type}{gene list identifier, ensembl_gene_id or hgnc_symbol}

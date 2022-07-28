@@ -4,8 +4,7 @@
 \alias{PerformSegmentationWithHMM}
 \title{PerformSegmentationWithHMM()}
 \usage{
-PerformSegmentationWithHMM(object, cnv.scale, removeCentromere = T,
-  cytoband)
+PerformSegmentationWithHMM(object, cnv.scale, removeCentromere = T, cytoband)
 }
 \arguments{
 \item{object}{casper object}
